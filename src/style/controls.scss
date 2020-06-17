@@ -1,0 +1,53 @@
+/**
+ * @file 操作区域
+ * @author svon.me@gmail.com
+ */
+
+.select-controls {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #DCDFE6;
+
+  .select-columns {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-basis: auto;
+  }
+  .select-column {
+    flex: 1;
+    height: 100%;
+    transition: width 0.5s;
+    border-right: 1px solid #DCDFE6;
+    &:last-of-type {
+      border-right: 0;
+    }
+    .column-main {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      position: relative;
+      transform: translateZ(0);
+      & > .el-checkbox-group {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        overflow-y: auto;
+      }
+    }
+    .column-loading {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      color: #409eff;
+    }
+    @import "./item.scss";
+  }
+}

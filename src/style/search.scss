@@ -1,0 +1,41 @@
+/**
+ * @file 单条数据样式
+ * @author svon.me@gmail.com
+ */
+
+.select-search-main {
+  width: 100%;
+  .el-autocomplete {
+    flex: 1;
+  }
+  .select-search-box {
+    display: flex;
+  }
+  &.no-gutter {
+    & /deep/ input {
+      /*
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      */
+      border-radius: 0;
+    }
+    & + .select-box {
+      .select-controls {
+        border-top-width: 0;
+      }
+    }
+  }
+  &.preview {
+    .search-right {
+      width: 40px + 380px;
+      min-width: 40px + 380px;
+    }
+    & + .select-box {
+      .select-preview {
+        .select-controls {
+          border-top-width: 1px;
+        }
+      }
+    }
+  }
+}

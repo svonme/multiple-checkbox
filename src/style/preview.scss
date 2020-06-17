@@ -1,0 +1,30 @@
+/**
+ * @file 预览
+ * @author svon.me@gmail.com
+ */
+
+.select-preview {
+  height: 100%;
+  display: flex;
+  & > :first-child {
+    display: flex;
+    height: 100%;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+  & > :last-child {
+    display: flex;
+    height: 100%;
+    width: 380px;
+  }
+  .preview-box {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    overflow-y: auto;
+  }
+}

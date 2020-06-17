@@ -1,0 +1,18 @@
+/**
+ * @file 头部样式
+ * @author svon.me@gmail.com
+ */
+
+.select-header {
+  height: 38px;
+  border-width: 0 0 1px 0;
+  border-color: #DCDFE6;
+  border-style: solid;
+  width: 100%;
+  .select-title {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

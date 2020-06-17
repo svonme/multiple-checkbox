@@ -1,0 +1,39 @@
+/**
+ * @file 单条数据样式
+ * @author svon.me@gmail.com
+ */
+
+ .item-content {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  
+  & > .el-checkbox {
+    padding-left: 5px;
+  }
+  
+  .checkbox-text {
+    & > span{
+      flex: 1;
+    }
+    font-size: 14px;
+    color: #202023;
+    margin-left: 5px;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    i {
+      font-size: 14px;
+      padding: 5px;
+    }
+    label {
+      @include ellipsis();
+      font-weight: bold;
+    }
+  }
+}

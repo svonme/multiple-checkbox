@@ -1,0 +1,17 @@
+{
+  "name": "@fengqiaogang/multiple-checkbox",
+  "version": "0.1.1",
+  "description": "A multidimensional check box component",
+  "main": "src/index.js",
+  "scripts": {
+  },
+  "author": "svon.me@gmail.com",
+  "license": "MIT",
+  "keywords": [
+    "checkbox"
+  ],
+  "devDependencies": {
+    "@fengqiaogang/dblist": "^0.1.5",
+    "lodash": "^4.17.15"
+  }
+}

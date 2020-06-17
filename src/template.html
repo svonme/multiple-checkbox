@@ -1,0 +1,90 @@
+<div v-cloak class="multiple-select">
+  <template v-if="search || $slots.search">
+    <div class="select-search-main" :class="{'no-gutter': searchGutter === 0, 'preview': preview}">
+      <div class="select-search-box" :style="`margin-bottom: ${searchGutter}px;`">
+        <slot name="search">
+          <el-autocomplete v-model="searchValue" :fetch-suggestions="searchQuery" :placeholder="placeholder" @select="handleCheckboxItem" :highlight-first-item="true">
+            <i slot="suffix" class="el-input__icon el-icon-search cursor"></i>
+            <template slot-scope="scope">
+              <div class="autocomplete-search">
+                <div class="name" v-html="scope.item.text"></div>
+                <div class="sub" v-show="scope.item.sub">{{ scope.item.sub }}</div>
+              </div>
+            </template>
+          </el-autocomplete>
+        </slot>
+        <!-- 自定义右上角内容 -->
+        <div class="search-right" v-if="preview">
+          <slot name="searchRight"></slot>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <div class="select-box">
+    <!-- 左侧操作 -->
+    <div class="select-controls">
+      <!--顶部-->
+      <div class="select-header" v-if="title || $slots.header">
+        <slot name="header">
+          <div class="select-title" v-if="title">{{ title }}</div>
+        </slot>
+      </div>
+      <div class="select-columns">
+        <div class="select-column" v-for="(id, index) in showSelect" :key="index">
+          <div class="column-main">
+            <el-checkbox-group v-if="checkList[index]" v-model="checkList[index]">
+              <div class="item-content" v-for="item in getColumnList(id)" :key="item[primaryKey]">
+                <el-checkbox :value="checkList[item[primaryKey]]" :indeterminate="indeterminate[item[primaryKey]]" :disabled="item.disabled" :label="item[primaryKey]" @change="checkboxChange($event, item)">
+                  <span></span>
+                </el-checkbox>
+                <template v-if="item.isHaveSon">
+                  <div class="checkbox-text" @click="checkboxClick(item)">
+                    <span>
+                      <label>{{ item[labelKey] }}</label>
+                    </span>
+                    <i class="el-icon-arrow-right"></i>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="checkbox-text">
+                    <span>
+                      <label>{{ item[labelKey] }}</label>
+                    </span>
+                  </div>
+                </template>
+              </div>
+            </el-checkbox-group>
+            <div class="el-checkbox-group" v-else>
+              <div class="column-loading">
+                <i class="el-icon-loading"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 右侧预览 -->
+    <div class="select-preview" v-if="preview">
+      <div>
+        <i class="el-icon-d-arrow-right"></i>
+      </div>
+      <div class="select-controls">
+        <div class="select-header" v-if="title || $slots.previewtitle">
+          <slot name="previewtitle">
+            <div class="select-title">{{ previewTitle }}</div>
+          </slot>
+        </div>
+        <div class="select-columns">
+          <div class="select-column">
+            <div class="column-main">
+              <div class="preview-box">
+                <slot name="preview"></slot>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
