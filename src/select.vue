@@ -175,7 +175,51 @@ export default {
       this.checkList = checkList;
       this.indeterminate = indeterminate;
     },
-    
+    // 搜索时异步请求数据
+    async searchQuery(queryString, cb) {
+      let array = [];
+      queryString = _.trim(queryString || '');
+      if (!queryString) {
+        return cb(array);
+      }
+      const db = this.list;
+      const where = {};
+      where[this.labelKey] = queryString;
+
+      let queryList = [];
+      try {
+        queryList = await this.getSearchServer(where)
+      } catch (error) {
+        // todo
+      }
+      if (queryList.length === 0) {
+        queryList = db.like(where);
+      }
+      _.each(queryList, item => {
+        var data = db.parentDeep(this.getPrimaryKeyWhere(item[this.primaryKey]));
+        var name = []
+        _.each(data, temp => {
+          name.push(_.trim(temp[this.labelKey]));
+        })
+        name = name.reverse().join(' > ');
+        let indexOf = name.lastIndexOf(queryString)
+        var value = Object.assign(item, {
+          value: item.name,
+          text: name.slice(0, indexOf) + `<b>${queryString}</b>` + name.slice(indexOf + queryString.length)
+        })
+        array.push(value);
+      })
+      cb(array);
+    },
+    /** 选中搜索提示内容 */
+    handleCheckboxItem(item) {
+      if (item[this.primaryKey]) {
+        // 将选中的元素在内容去显示
+        this.amendShowSelect(item);
+        // 设置该元素为选中状态
+        this.checkboxChange(true, item);
+      }
+    },
     /**
      * 设置 level 级别
      */
